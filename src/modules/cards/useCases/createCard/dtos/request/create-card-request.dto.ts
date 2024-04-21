@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 export class CreateCardDTO {
   @ApiProperty({
@@ -32,4 +32,12 @@ export class CreateCardDTO {
   })
   @IsString()
   readonly title: string;
+
+  @ApiPropertyOptional({
+    type: 'string',
+    description: 'Category ids',
+    example: ['177f5cf2-ed0a-4e10-8160-a9c7d419f0c3'],
+  })
+  @IsOptional()
+  readonly category_ids: string[];
 }

@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { CategoryRepository } from '../../../../categories/repositories/category.repository';
 import { UserEntityInterface } from '../../../../users/interfaces/user-entity.interface';
 import { UserRepository } from '../../../../users/repositories/user.repository';
 import { CardEntityInterface } from '../../../interfaces/card-entity.interface';
@@ -24,6 +25,13 @@ describe('Create card UseCase', () => {
         },
         {
           provide: UserRepository,
+          useValue: {
+            createAndSave: jest.fn(),
+            findById: jest.fn(),
+          },
+        },
+        {
+          provide: CategoryRepository,
           useValue: {
             createAndSave: jest.fn(),
             findById: jest.fn(),
@@ -57,7 +65,12 @@ describe('Create card UseCase', () => {
       title: 'Card',
     } as CreateCardDTO;
 
-    const cardCreated = Object.assign(card, { id: '1' }) as CardEntityInterface;
+    const cardCreated: CardEntityInterface = {
+      ...card,
+      id: '1',
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
 
     const findUserByIdSpy = jest
       .spyOn(repositoryUser, 'findById')

@@ -1,6 +1,7 @@
 import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
+import { CategoryRepository } from '../../../../categories/repositories/category.repository';
 import { UserRepository } from '../../../../users/repositories/user.repository';
 import { CardEntityInterface } from '../../../interfaces/card-entity.interface';
 import { CardRepository } from '../../../repositories/card.repository';
@@ -23,6 +24,10 @@ describe('Create card Controller', () => {
         },
         {
           provide: CardRepository,
+          useValue: {},
+        },
+        {
+          provide: CategoryRepository,
           useValue: {},
         },
       ],
