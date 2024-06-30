@@ -1,19 +1,17 @@
-import { PrismaService } from '../../../prisma.service';
+import { prisma } from '../../../prisma.service';
 import { CreateAndSaveCardDTO } from '../dtos/request/create-card-request.dto';
 import { FindAllCardsDTO } from '../dtos/request/find-all-cards-request.dto';
 import { CardEntityInterface } from '../interfaces/card-entity.interface';
 import { CardRepositoryInterface } from './interfaces/card-repository.interface';
 
 export class CardRepository implements CardRepositoryInterface {
-  constructor(private prisma: PrismaService) {}
-
   async createAndSave({
     description,
     status,
     title,
     user,
   }: CreateAndSaveCardDTO): Promise<CardEntityInterface> {
-    return this.prisma.cards.create({
+    return prisma.cards.create({
       data: {
         description,
         status,
@@ -24,14 +22,14 @@ export class CardRepository implements CardRepositoryInterface {
   }
 
   async updateAndSave(card: CardEntityInterface): Promise<CardEntityInterface> {
-    return this.prisma.cards.update({
+    return prisma.cards.update({
       where: { id: card.id },
       data: card,
     });
   }
 
   async findById(id: string): Promise<CardEntityInterface | null> {
-    return this.prisma.cards.findFirst({ where: { id } });
+    return prisma.cards.findFirst({ where: { id } });
   }
 
   async findAll({
@@ -41,7 +39,7 @@ export class CardRepository implements CardRepositoryInterface {
     title,
     user_id,
   }: FindAllCardsDTO): Promise<CardEntityInterface[]> {
-    return this.prisma.cards.findMany({
+    return prisma.cards.findMany({
       where: {
         user_id,
         id: id ? { equals: id } : undefined,
@@ -55,7 +53,7 @@ export class CardRepository implements CardRepositoryInterface {
   }
 
   async deleteCard(card: CardEntityInterface): Promise<void> {
-    await this.prisma.cards.delete({
+    await prisma.cards.delete({
       where: { id: card.id },
     });
   }
