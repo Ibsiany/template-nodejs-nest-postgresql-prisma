@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from '../../prisma.service';
 import { CategoryRepository } from '../categories/repositories/category.repository';
 import { UserRepository } from '../users/repositories/user.repository';
 import { CardRepository } from './repositories/card.repository';
@@ -21,7 +20,6 @@ import { UpdateCardUseCase } from './useCases/updateCard/update-card.usecase';
     DeleteCardUseCase,
     GetCardsUseCase,
     UpdateCardUseCase,
-    PrismaService,
   ],
   controllers: [
     CreateCardController,

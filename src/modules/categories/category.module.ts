@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from '../../prisma.service';
 import { UserRepository } from '../users/repositories/user.repository';
 import { CategoryRepository } from './repositories/category.repository';
 import { CreateCategoryController } from './useCases/createCategory/create-category.controller';
@@ -17,7 +16,6 @@ import { GetCategoriesUseCase } from './useCases/getCategories/get-categories.us
     CreateCategoryUseCase,
     DeleteCategoryUseCase,
     GetCategoriesUseCase,
-    PrismaService,
   ],
   controllers: [
     CreateCategoryController,

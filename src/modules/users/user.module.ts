@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from '../../prisma.service';
 import { CardRepository } from '../cards/repositories/card.repository';
 import { CategoryRepository } from '../categories/repositories/category.repository';
 import { UserRepository } from './repositories/user.repository';
@@ -24,7 +23,6 @@ import { UpdateUserUseCase } from './useCases/updateUser/update-user.usecase';
     GetUserByIdUseCase,
     SessionUseCase,
     UpdateUserUseCase,
-    PrismaService,
   ],
   controllers: [
     CreateUserController,
